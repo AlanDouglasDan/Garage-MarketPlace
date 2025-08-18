@@ -1,0 +1,236 @@
+import { StyleSheet } from 'react-native';
+
+// import { font } from 'core/utils';
+
+export const typography = StyleSheet.create({
+  header48: {
+    // fontFamily: font.variableFontWeight,
+    fontWeight: '700',
+    fontSize: 48,
+    lineHeight: 72,
+  },
+  header32: {
+    // fontFamily: font.variableFontWeight,
+    fontWeight: '700',
+    fontSize: 32,
+    lineHeight: 38,
+  },
+  header36: {
+    // fontFamily: font.variableFontWeight,
+    fontWeight: '700',
+    fontSize: 36,
+    lineHeight: 43,
+  },
+  header38: {
+    // fontFamily: font.variableFontWeight,
+    fontWeight: '700',
+    fontSize: 38,
+    lineHeight: 38,
+  },
+  header30: {
+    // fontFamily: font.variableFontWeight,
+    fontWeight: '700',
+    fontSize: 30,
+    lineHeight: 41,
+  },
+  header28: {
+    // fontFamily: font.variableFontWeight,
+    fontWeight: '700',
+    fontSize: 28,
+    lineHeight: 33.5,
+  },
+  header24: {
+    // fontFamily: font.variableFontWeight,
+    fontWeight: '700',
+    fontSize: 24,
+    lineHeight: 29,
+  },
+  header26: {
+    // fontFamily: font.variableFontWeight,
+    fontWeight: '700',
+    fontSize: 26,
+    lineHeight: 31,
+  },
+  header22: {
+    fontSize: 22,
+    lineHeight: 26.5,
+    // fontFamily: font.variableFontWeight,
+    fontWeight: '700',
+  },
+  header20: {
+    fontSize: 20,
+    lineHeight: 24,
+    // fontFamily: font.variableFontWeight,
+    fontWeight: '700',
+  },
+  header18: {
+    fontSize: 18,
+    lineHeight: 22,
+    // fontFamily: font.variableFontWeight,
+    fontWeight: '700',
+  },
+  header17: {
+    fontSize: 17,
+    lineHeight: 22,
+    // fontFamily: font.variableFontWeight,
+    fontWeight: '700',
+  },
+  header16: {
+    fontSize: 16,
+    lineHeight: 21,
+    // fontFamily: font.variableFontWeight,
+    fontWeight: '700',
+  },
+  header14: {
+    fontSize: 14,
+    lineHeight: 18,
+    // fontFamily: font.variableFontWeight,
+    fontWeight: '700',
+  },
+  header13: {
+    fontSize: 13,
+    lineHeight: 16,
+    // fontFamily: font.variableFontWeight,
+    fontWeight: '700',
+  },
+  header12: {
+    fontSize: 12,
+    lineHeight: 17,
+    // fontFamily: font.variableFontWeight,
+    fontWeight: '700',
+  },
+  header11: {
+    fontSize: 11,
+    lineHeight: 17,
+    // fontFamily: font.variableFontWeight,
+    fontWeight: '700',
+  },
+  header10: {
+    fontSize: 10,
+    lineHeight: 16,
+    // fontFamily: font.variableFontWeight,
+    fontWeight: '700',
+  },
+
+  semiheader18: {
+    fontSize: 18,
+    fontWeight: '600',
+    lineHeight: 22,
+    // fontFamily: font.variableFontWeight,
+  },
+  semiheader16: {
+    fontSize: 16,
+    fontWeight: '600',
+    lineHeight: 20,
+    // fontFamily: font.variableFontWeight,
+  },
+  semiheader14: {
+    fontSize: 14,
+    fontWeight: '600',
+    lineHeight: 24,
+    // fontFamily: font.variableFontWeight,
+  },
+  semiheader15: {
+    fontSize: 15,
+    fontWeight: '600',
+    lineHeight: 20,
+    // fontFamily: font.variableFontWeight,
+  },
+  semiheader13: {
+    fontSize: 13,
+    fontWeight: '600',
+    lineHeight: 20,
+    // fontFamily: font.variableFontWeight,
+  },
+  semiheader12: {
+    fontSize: 12,
+    fontWeight: '600',
+    lineHeight: 17,
+    // fontFamily: font.variableFontWeight,
+  },
+  semiheader11: {
+    fontSize: 11,
+    fontWeight: '600',
+    lineHeight: 15,
+    // fontFamily: font.variableFontWeight,
+  },
+
+  text20: {
+    fontSize: 20,
+    fontWeight: '400',
+    lineHeight: 24,
+    // fontFamily: font.variableFontWeight,
+  },
+  text22: {
+    fontSize: 22,
+    fontWeight: '400',
+    lineHeight: 24,
+    // fontFamily: font.variableFontWeight,
+  },
+  text18: {
+    fontSize: 18,
+    fontWeight: '400',
+    lineHeight: 22,
+    // fontFamily: font.variableFontWeight,
+  },
+  text16: {
+    fontSize: 16,
+    fontWeight: '400',
+    lineHeight: 24,
+    // fontFamily: font.variableFontWeight,
+  },
+  text15: {
+    fontSize: 15,
+    fontWeight: '400',
+    lineHeight: 18,
+    // fontFamily: font.variableFontWeight,
+  },
+  text14: {
+    fontSize: 14,
+    fontWeight: '400',
+    lineHeight: 16,
+    // fontFamily: font.variableFontWeight,
+  },
+  text13: {
+    fontSize: 13,
+    fontWeight: '400',
+    lineHeight: 16,
+    // fontFamily: font.variableFontWeight,
+  },
+  text12: {
+    fontSize: 12,
+    fontWeight: '400',
+    lineHeight: 16,
+    // fontFamily: font.variableFontWeight,
+  },
+  text11: {
+    fontSize: 11,
+    fontWeight: '400',
+    lineHeight: 14,
+    // fontFamily: font.variableFontWeight,
+  },
+  text10: {
+    fontSize: 10,
+    fontWeight: '400',
+    lineHeight: 12,
+    // fontFamily: font.variableFontWeight,
+  },
+  text9: {
+    fontSize: 9,
+    fontWeight: '400',
+    lineHeight: 11,
+    // fontFamily: font.variableFontWeight,
+  },
+  text8: {
+    fontSize: 8,
+    fontWeight: '400',
+    lineHeight: 10,
+    // fontFamily: font.variableFontWeight,
+  },
+  textPlaceholder: {
+    fontSize: 14,
+    fontWeight: '400',
+    lineHeight: 30,
+    // fontFamily: font.variableFontWeight,
+  },
+});
