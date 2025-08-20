@@ -9,13 +9,14 @@ import { useGarage } from "store/garage/hooks";
 import { Button } from "components/Button";
 import { Input } from "components/Input";
 import { spacing, palette } from "core/styles";
+import { navigate } from "navigation/utils";
 import styles from "./SubmitReview.styles";
 
 const SubmitReview = (props: any) => {
   const listing_id: string = props?.payload?.listing_id ?? "";
   const guest_id: string = props?.payload?.guest_id ?? "";
 
-  const { submitReview, loading } = useGarage();
+  const { submitReview, loading, getBookings, getListings } = useGarage();
 
   const [feedback, setFeedback] = useState<string>("");
 
@@ -30,6 +31,9 @@ const SubmitReview = (props: any) => {
     });
 
     if (res && !res.error) {
+      await getBookings(guest_id);
+      await getListings();
+
       Toast.show({
         type: "success",
         text1: "Success",
@@ -37,6 +41,8 @@ const SubmitReview = (props: any) => {
       });
 
       SheetManager.hide("submit-review");
+
+      navigate("Bottom Tabs");
     } else {
       Toast.show({
         type: "error",

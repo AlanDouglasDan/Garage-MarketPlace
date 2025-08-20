@@ -105,7 +105,7 @@ const Profile: FC<
                 <>
                   <View style={layout.flex1}>
                     <Input
-                      label="Enter your full name"
+                      label="Full name"
                       placeholder="Full Name"
                       value={values.fullName}
                       onChangeText={(text) => setFieldValue("fullName", text)}
@@ -120,7 +120,7 @@ const Profile: FC<
                     />
 
                     <Input
-                      label="Enter your email"
+                      label="Email"
                       placeholder="Email"
                       value={values.email}
                       onChangeText={(text) => setFieldValue("email", text)}
@@ -133,7 +133,7 @@ const Profile: FC<
                     />
 
                     <Input
-                      label="Enter your phone number"
+                      label="Phone number"
                       placeholder="Phone Number"
                       value={values.phone}
                       onChangeText={(text) => setFieldValue("phone", text)}

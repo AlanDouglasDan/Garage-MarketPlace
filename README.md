@@ -66,6 +66,21 @@ A mobile application for renting and listing garage spaces. Built with React Nat
 - `npm test` or `yarn test` - Run tests
 - `npm run build` or `yarn build` - Build the app for production
 
+## 🔒 Access Restrictions
+
+1. **Guest Users**
+   - Can browse and view garage listings and their details
+   - Cannot rent garages or leave reviews without logging in
+
+2. **Host Mode**
+   - Only available to logged-in users
+   - Toggle host mode using the switch in the top-right corner of the Garages page
+   - Host mode must be enabled to create new garage listings
+
+3. **Renting & Reviews**
+   - Users cannot rent or review their own garage listings
+   - To test these features, use a different account from the one you used to create the garage listing
+
 ## 🤝 Contributing
 
 1. Fork the project
