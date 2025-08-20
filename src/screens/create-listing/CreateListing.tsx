@@ -370,7 +370,7 @@ const CreateListing: FC<
                         });
                       }}
                       query={{
-                        key: "AIzaSyCqySNRVr-nR-6l_4bOL-R8BPDXf2a8RTA",
+                        key: process.env.EXPO_PUBLIC_GOOGLE_PLACES_API_KEY,
                         language: "en",
                       }}
                       styles={{
