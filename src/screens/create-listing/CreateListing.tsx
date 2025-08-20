@@ -233,6 +233,7 @@ const CreateListing: FC<
                       }
                       onBlur={() => setFieldTouched("description")}
                       keyboardType="default"
+                      rows={4}
                     />
 
                     <Input
