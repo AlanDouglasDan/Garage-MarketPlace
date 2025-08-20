@@ -46,11 +46,6 @@ A mobile application for renting and listing garage spaces. Built with React Nat
    npm run android
    # or
    yarn android
-   
-   # For web
-   npm run web
-   # or
-   yarn web
    ```
 
 ## 🛠️ Development

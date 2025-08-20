@@ -8,13 +8,13 @@ export default StyleSheet.create({
     backgroundColor: palette.WHITE,
   },
   innerContainer: {
-    paddingTop: Platform.OS === "ios" ? 20 : 48,
-    paddingBottom: Platform.OS === "ios" ? 20 : 44,
+    paddingTop: 20,
     flex: 1,
     paddingHorizontal: 24,
   },
   contentContainer: {
     flexGrow: 1,
+    paddingBottom: Platform.OS === "ios" ? 20 : 60,
   },
   sliderContainer: {
     marginBottom: 24,

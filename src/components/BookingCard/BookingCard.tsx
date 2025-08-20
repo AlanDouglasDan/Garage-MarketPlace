@@ -54,7 +54,10 @@ const Booking: FC<BookingProps> = ({ booking, navigation }) => {
     <View style={[styles.bookingContainer, common.shadow]}>
       <TouchableOpacity
         onPress={() =>
-          navigation.navigate("Garage Details", { listing: booking.listings })
+          navigation.navigate("Garage Details", {
+            listing: booking.listings,
+            fromBookingCard: true,
+          })
         }
       >
         <View style={[styles.gap4, layout.flex1]}>

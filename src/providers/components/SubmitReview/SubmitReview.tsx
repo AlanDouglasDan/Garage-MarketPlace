@@ -77,6 +77,7 @@ const SubmitReview = (props: any) => {
         value={feedback}
         onChangeText={(text) => setFeedback(text)}
         containerStyle={spacing.marginTop24}
+        rows={4}
       />
 
       <Button

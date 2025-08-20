@@ -67,7 +67,7 @@ const BottomTabsNav: FC = () => {
           options={{
             tabBarIcon: ({ focused }) => renderTabBarIcon("Listings", focused),
             tabBarLabel: ({ focused }) =>
-              renderTabBarLabel("Listings", focused),
+              renderTabBarLabel("Garages", focused),
             headerShown: false,
           }}
         />
