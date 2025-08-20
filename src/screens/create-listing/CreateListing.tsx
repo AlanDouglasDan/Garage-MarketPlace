@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from "react";
+import React, { FC, useState } from "react";
 import {
   Text,
   View,
@@ -12,10 +12,7 @@ import {
 import { Formik } from "formik";
 import * as yup from "yup";
 import Slider from "@react-native-community/slider";
-// import * as Location from "expo-location";
 import * as ImagePicker from "expo-image-picker";
-// import MapView, { Marker } from "react-native-maps";
-// import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import Checkbox from "expo-checkbox";
 import Toast from "react-native-toast-message";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
@@ -64,33 +61,12 @@ const CreateListing: FC<
 
   const [loading, setLoading] = useState<boolean>(false);
 
-  //   const [location, setLocation] = useState<any>({
-  //     lat: undefined,
-  //     lng: undefined,
-  //   });
   const [amenities, setAmenities] = useState({
     cctv: false,
     indoor: false,
     security24h: false,
   });
   const [image, setImage] = useState<any>(null);
-
-  // Get the current user's location
-  //   useEffect(() => {
-  //     (async () => {
-  //       let { status } = await Location.requestForegroundPermissionsAsync();
-  //       if (status !== "granted") {
-  //         console.log("Location permission not granted");
-  //         return;
-  //       }
-
-  //       let location = await Location.getCurrentPositionAsync({});
-  //       setLocation({
-  //         lat: location.coords.latitude,
-  //         lng: location.coords.longitude,
-  //       });
-  //     })();
-  //   }, []);
 
   // Function to pick an image
   const pickImage = async () => {
@@ -357,57 +333,6 @@ const CreateListing: FC<
                         <Text style={styles.errorText}>{errors.price}</Text>
                       )}
                     </View>
-
-                    {/* <GooglePlacesAutocomplete
-                      placeholder="Search for Address"
-                      predefinedPlaces={[]}
-                      fetchDetails={true}
-                      onPress={(data, details = null) => {
-                        setFieldValue("address", data.description);
-                        setLocation({
-                          lat: details?.geometry.location.lat,
-                          lng: details?.geometry.location.lng,
-                        });
-                      }}
-                      query={{
-                        key: process.env.EXPO_PUBLIC_GOOGLE_PLACES_API_KEY,
-                        language: "en",
-                      }}
-                      styles={{
-                        textInputContainer: spacing.marginTop20,
-                        textInput: {
-                          height: 38,
-                          color: "#000",
-                          fontSize: 16,
-                        },
-                        // predefinedPlacesDescription: styles.header16,
-                        description: {
-                          color: "#000",
-                        },
-                      }}
-                      textInputProps={{
-                        label: "Enter the address",
-                        InputComp: Input,
-                        clearButtonMode: "unless-editing",
-                        placeholder: "Enter the address",
-                        containerStyle: styles.input,
-                      }}
-                      listViewDisplayed
-                    /> */}
-
-                    {/* <MapView
-                      provider="google"
-                      style={styles.map}
-                      region={{
-                        latitude: location.lat,
-                        longitude: location.lng,
-                        latitudeDelta: 0.0922,
-                        longitudeDelta: 0.0421,
-                      }}
-                      showsUserLocation={true}
-                    >
-                      <Marker coordinate={location} />
-                    </MapView> */}
 
                     {/* Image Picker */}
                     <TouchableOpacity style={styles.image} onPress={pickImage}>

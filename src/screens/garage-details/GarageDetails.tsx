@@ -18,7 +18,7 @@ import Toast from "react-native-toast-message";
 const GarageDetails: FC<
   NativeStackScreenProps<AppStackNavParams, "Garage Details">
 > = ({ navigation, route }) => {
-  const { listing } = route.params ?? {};
+  const { listing, fromBookingCard = false } = route.params ?? {};
 
   const { currentUser } = useUser();
 
@@ -109,32 +109,36 @@ const GarageDetails: FC<
           )}
         </View>
 
-        <View style={[spacing.marginTop24, styles.gap]}>
-          <Button
-            title="Leave Review"
-            variant="transparent"
-            onPress={() =>
-              currentUser
-                ? SheetManager.show("submit-review", {
-                    // @ts-ignore
-                    payload: {
-                      listing_id: listing.id,
-                      guest_id: currentUser?.id,
-                    },
-                  })
-                : Toast.show({
-                    type: "error",
-                    text1: "Error",
-                    text2: "User not authenticated",
-                  })
-            }
-          />
+        {/* Show Action buttons only if the current user is not the host */}
+        {currentUser?.id !==
+          (fromBookingCard ? listing.host_id.id : listing.host_id) && (
+          <View style={[spacing.marginTop24, styles.gap]}>
+            <Button
+              title="Leave Review"
+              variant="transparent"
+              onPress={() =>
+                currentUser
+                  ? SheetManager.show("submit-review", {
+                      // @ts-ignore
+                      payload: {
+                        listing_id: listing.id,
+                        guest_id: currentUser?.id,
+                      },
+                    })
+                  : Toast.show({
+                      type: "error",
+                      text1: "Error",
+                      text2: "User not authenticated",
+                    })
+              }
+            />
 
-          <Button
-            title="Rent Now"
-            onPress={() => navigation.navigate("Rent Now", { listing })}
-          />
-        </View>
+            <Button
+              title="Rent Now"
+              onPress={() => navigation.navigate("Rent Now", { listing })}
+            />
+          </View>
+        )}
       </ScrollView>
     </SafeAreaView>
   );

@@ -17,7 +17,7 @@ export type AppStackNavParams = {
   Login: undefined;
   "Bottom Tabs": undefined;
   "Create Listing": undefined;
-  "Garage Details": { listing: any };
+  "Garage Details": { listing: any; fromBookingCard?: boolean };
   "Rent Now": { listing: any; fromBookingCard?: boolean };
 };
 
