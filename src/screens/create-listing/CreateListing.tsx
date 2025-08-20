@@ -88,6 +88,16 @@ const CreateListing: FC<
     }));
   };
 
+  const success = () => {
+    Toast.show({
+      type: "success",
+      text1: "Success",
+      text2: "Listing created successfully!",
+    });
+
+    navigation.navigate("Bottom Tabs");
+  };
+
   // Function to upload image to Supabase Storage
   const uploadImage = async (listingId: string) => {
     const fileExtension = image.split(".").pop(); // Get the file extension (jpg, png, etc.)
@@ -136,13 +146,7 @@ const CreateListing: FC<
           text2: "Error inserting image: " + insertError.message,
         });
       } else {
-        Toast.show({
-          type: "success",
-          text1: "Success",
-          text2: "Listing created successfully!",
-        });
-
-        navigation.navigate("Bottom Tabs");
+        success();
       }
     }
   };
@@ -163,7 +167,8 @@ const CreateListing: FC<
     });
 
     if (res && !res.error) {
-      await uploadImage(res.payload[0].id);
+      if (image) await uploadImage(res.payload[0].id);
+      else success();
     } else {
       Toast.show({
         type: "error",
