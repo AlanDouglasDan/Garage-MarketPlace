@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import { TouchableOpacity, Text, View, Alert } from "react-native";
 import Toast from "react-native-toast-message";
 
@@ -82,33 +82,39 @@ const Booking: FC<BookingProps> = ({ booking, navigation }) => {
             variant="transparent"
             containerStyle={layout.flex1}
             onPress={() =>
-              navigation.navigate("Rent Now", { listing: booking.listings })
+              navigation.navigate("Rent Now", {
+                listing: booking.listings,
+                fromBookingCard: true,
+              })
             }
           />
 
-          <Button
-            title="Cancel"
-            containerStyle={layout.flex1}
-            onPress={() => {
-              Alert.alert(
-                "Cancel Booking",
-                "Are you sure you want to cancel this booking?",
-                [
-                  {
-                    text: "Close",
-                    onPress: () => {},
-                  },
-                  {
-                    text: "Cancel Booking",
-                    style: "destructive",
-                    onPress: async () => handleSubmit(),
-                  },
-                ]
-              );
-            }}
-            disabled={loading}
-            loading={loading}
-          />
+          {new Date(booking.start_date) > new Date() && (
+            <Button
+              title="Cancel"
+              variant="destructive"
+              containerStyle={layout.flex1}
+              onPress={() => {
+                Alert.alert(
+                  "Cancel Booking",
+                  "Are you sure you want to cancel this booking?",
+                  [
+                    {
+                      text: "Close",
+                      onPress: () => {},
+                    },
+                    {
+                      text: "Cancel Booking",
+                      style: "destructive",
+                      onPress: async () => handleSubmit(),
+                    },
+                  ]
+                );
+              }}
+              disabled={loading}
+              loading={loading}
+            />
+          )}
         </View>
       </View>
     </View>

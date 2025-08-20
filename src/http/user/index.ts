@@ -23,7 +23,7 @@ export const signUp = async (data: SignupData): Promise<any> => {
       email,
       phone,
       avatar_url: "", // Default value, can be updated later
-      is_host: false, // Optional, set the default role
+      is_host: true, // Optional, set the default role
     },
   ]);
 

@@ -45,6 +45,7 @@ const Button: FC<ButtonProps> = ({
           styles.button,
           disabled && styles.disabled,
           variant === "transparent" && styles.transparent,
+          variant === "destructive" && styles.destructive,
           style,
         ]}
         onPress={disabled ? () => {} : onPress}
@@ -59,6 +60,7 @@ const Button: FC<ButtonProps> = ({
               styles.buttonText,
               textStyle,
               variant === "transparent" && { color: palette.BLACK },
+              variant === "destructive" && { color: palette.RED },
               disabled && { color: palette.GREY2 },
             ]}
           >

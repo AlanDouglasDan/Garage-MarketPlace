@@ -86,8 +86,8 @@ const GarageDetails: FC<
           <Text style={styles.semiheader18}>Reviews</Text>
 
           {listing.reviews?.length > 0 ? (
-            listing.reviews.map((review: any) => (
-              <View key={review.id} style={styles.reviewContainer}>
+            listing.reviews.map((review: any, index: number) => (
+              <View key={index} style={styles.reviewContainer}>
                 <View style={[layout.flexedRow, styles.gap]}>
                   {[1, 2, 3, 4, 5].map((star) => (
                     <FontAwesome
