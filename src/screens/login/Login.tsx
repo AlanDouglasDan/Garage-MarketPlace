@@ -1,19 +1,19 @@
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import {
   View,
   SafeAreaView,
   ScrollView,
   KeyboardAvoidingView,
   Platform,
-  Alert,
 } from "react-native";
 import { Formik } from "formik";
 import * as yup from "yup";
 import { Feather } from "@expo/vector-icons";
+import Toast from "react-native-toast-message";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 import { AppStackNavParams } from "navigation/AppStackNav";
-import { supabase } from "core/supabase";
+import { useUser } from "store/user/hooks";
 import { Button } from "components/Button";
 import { Input } from "components/Input";
 import { layout, spacing, palette } from "core/styles";
@@ -41,23 +41,28 @@ const validationSchema = yup.object({
 const Login: FC<NativeStackScreenProps<AppStackNavParams, "Login">> = ({
   navigation,
 }) => {
-  const [loading, setLoading] = useState<boolean>(false);
+  const { logIn, loading } = useUser();
 
   const onSubmit = async (values: FormValues) => {
     const { email, password } = values;
 
-    setLoading(true);
+    const res = await logIn({ email, password });
 
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+    if (res.error) {
+      Toast.show({
+        type: "error",
+        text1: "Error",
+        text2: res.error.message,
+      });
+    } else {
+      Toast.show({
+        type: "success",
+        text1: "Success",
+        text2: "User logged in successfully",
+      });
 
-    console.log("User signed in successfully!", data);
-
-    if (error) Alert.alert(error.message);
-
-    setLoading(false);
+      navigation.navigate("Bottom Tabs");
+    }
   };
 
   return (

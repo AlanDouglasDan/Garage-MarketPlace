@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect } from "react";
 import {
   Text,
   View,
@@ -9,60 +9,60 @@ import {
 } from "react-native";
 import { Formik } from "formik";
 import * as yup from "yup";
-import { Feather } from "@expo/vector-icons";
 import Toast from "react-native-toast-message";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
-import { AppStackNavParams } from "navigation/AppStackNav";
+import { BottomTabsNavParams } from "navigation/bottom-tabs-nav/BottomTabsNav";
 import { useUser } from "store/user/hooks";
-import { Button } from "components/Button";
 import { Input } from "components/Input";
-import { Logo } from "components/Logo";
-import { layout, spacing, palette } from "core/styles";
-import styles from "./SignUp.styles";
+import { Button } from "components/Button";
+import { layout, spacing } from "core/styles";
+import styles from "./Profile.styles";
 
 interface FormValues {
   fullName: string;
   email: string;
   phone: string;
-  password: string;
 }
 
 const initialValues: FormValues = {
   fullName: "",
   email: "",
   phone: "",
-  password: "",
 };
 
 const validationSchema = yup.object({
   fullName: yup.string().required(),
   email: yup.string().required(),
   phone: yup.string().required(),
-  password: yup.string().required(),
 });
 
-const SignUp: FC<NativeStackScreenProps<AppStackNavParams, "SignUp">> = ({
-  navigation,
-}) => {
-  const { loading, signUp } = useUser();
+const Profile: FC<
+  NativeStackScreenProps<BottomTabsNavParams, "Profile">
+> = () => {
+  const { currentUser, updateUser, loading } = useUser();
 
   const onSubmit = async (values: FormValues) => {
-    const { fullName, email, phone, password } = values;
+    const { fullName, email, phone } = values;
 
-    const res = await signUp({ fullName, email, phone, password });
+    const res = await updateUser({
+      full_name: fullName,
+      email,
+      phone,
+      id: currentUser?.id,
+    });
 
     if (res && !res.error) {
       Toast.show({
         type: "success",
         text1: "Success",
-        text2: "User created successfully",
+        text2: "Profile updated successfully",
       });
     } else {
       Toast.show({
         type: "error",
         text1: "Error",
-        text2: res.error?.message || "Something went wrong",
+        text2: "Something went wrong",
       });
     }
   };
@@ -72,16 +72,13 @@ const SignUp: FC<NativeStackScreenProps<AppStackNavParams, "SignUp">> = ({
       <ScrollView
         style={styles.innerContainer}
         contentContainerStyle={styles.contentContainer}
-        keyboardShouldPersistTaps="handled"
       >
         <KeyboardAvoidingView
           keyboardVerticalOffset={Platform.OS === "ios" ? 100 : 50}
           behavior="padding"
           style={layout.flex1}
         >
-          <View style={styles.centerSection}>
-            <Logo />
-          </View>
+          <Text style={styles.bigText}>Profile</Text>
 
           <Formik
             initialValues={initialValues}
@@ -95,9 +92,15 @@ const SignUp: FC<NativeStackScreenProps<AppStackNavParams, "SignUp">> = ({
               setFieldValue,
               handleSubmit,
               setFieldTouched,
-              isValid,
-              dirty,
             }) => {
+              useEffect(() => {
+                if (currentUser) {
+                  setFieldValue("fullName", currentUser.full_name);
+                  setFieldValue("email", currentUser.email);
+                  setFieldValue("phone", currentUser.phone);
+                }
+              }, [currentUser]);
+
               return (
                 <>
                   <View style={layout.flex1}>
@@ -106,7 +109,7 @@ const SignUp: FC<NativeStackScreenProps<AppStackNavParams, "SignUp">> = ({
                       placeholder="Full Name"
                       value={values.fullName}
                       onChangeText={(text) => setFieldValue("fullName", text)}
-                      containerStyle={spacing.marginTop32}
+                      containerStyle={spacing.marginTop16}
                       error={
                         touched.fullName && errors.fullName
                           ? errors.fullName
@@ -141,49 +144,14 @@ const SignUp: FC<NativeStackScreenProps<AppStackNavParams, "SignUp">> = ({
                       onBlur={() => setFieldTouched("phone")}
                       keyboardType="phone-pad"
                     />
-
-                    <Input
-                      label="Enter your password"
-                      placeholder="Password"
-                      value={values.password}
-                      onChangeText={(text) => setFieldValue("password", text)}
-                      containerStyle={spacing.marginTop24}
-                      error={
-                        touched.password && errors.password
-                          ? errors.password
-                          : undefined
-                      }
-                      onBlur={() => setFieldTouched("password")}
-                      keyboardType="default"
-                      type="password"
-                    />
                   </View>
 
                   <Button
-                    title="Create my account"
-                    suffixIcon={
-                      <Feather
-                        name="arrow-right"
-                        size={24}
-                        color={isValid && dirty ? palette.WHITE : palette.GREY2}
-                      />
-                    }
+                    title="Update Profile"
                     onPress={() => handleSubmit()}
-                    disabled={!(isValid && dirty) || loading}
+                    disabled={!currentUser || loading}
                     loading={loading}
                   />
-
-                  <View style={styles.signInContainer}>
-                    <Text style={styles.signInText}>
-                      Already have an account?{" "}
-                    </Text>
-                    <Text
-                      style={styles.signInLink}
-                      onPress={() => navigation.navigate("Login")}
-                    >
-                      Sign In
-                    </Text>
-                  </View>
                 </>
               );
             }}
@@ -194,4 +162,4 @@ const SignUp: FC<NativeStackScreenProps<AppStackNavParams, "SignUp">> = ({
   );
 };
 
-export default SignUp;
+export default Profile;
