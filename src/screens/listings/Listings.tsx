@@ -38,7 +38,6 @@ const Listings: FC<NativeStackScreenProps<BottomTabsNavParams, "Listings">> = ({
   const [garages, setGarages] = useState<any[]>([]);
   const [filteredGarages, setFilteredGarages] = useState<any[]>([]);
   const [showPriceFilter, setShowPriceFilter] = useState<boolean>(false);
-  const [minPrice, setMinPrice] = useState<number>(0);
   const [maxPrice, setMaxPrice] = useState<number>(1000);
   const [priceRange, setPriceRange] = useState<number>(0);
   const slideAnim = React.useRef(new Animated.Value(0)).current;
@@ -134,17 +133,6 @@ const Listings: FC<NativeStackScreenProps<BottomTabsNavParams, "Listings">> = ({
         <ActivityIndicator size="large" color={palette.BLACK} />
       </View>
     );
-  }
-
-  // Define props interface for ListHeader
-  interface ListHeaderProps {
-    currentUser: any; // Consider replacing 'any' with proper User type if available
-    isHost: boolean;
-    toggleHostStatus: (value: boolean) => Promise<void>;
-    searchTerm: string;
-    setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
-    clearSearch: () => void;
-    filteredGarages: any[]; // Consider replacing 'any' with proper Garage type if available
   }
 
   // Empty state component
