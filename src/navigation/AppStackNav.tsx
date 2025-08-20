@@ -18,7 +18,7 @@ export type AppStackNavParams = {
   "Bottom Tabs": undefined;
   "Create Listing": undefined;
   "Garage Details": { listing: any };
-  "Rent Now": { listing: any };
+  "Rent Now": { listing: any; fromBookingCard?: boolean };
 };
 
 const Stack = createNativeStackNavigator<AppStackNavParams>();

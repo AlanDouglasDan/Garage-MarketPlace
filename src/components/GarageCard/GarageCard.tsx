@@ -54,7 +54,7 @@ const GarageCard: FC<GarageCardProps> = ({
       key={listing.id}
       style={[
         styles.listingContainer,
-        common.shadow,
+        fullCard ? common.shadow : {},
         fullCard ? styles.cardedContainer : {},
       ]}
     >

@@ -58,6 +58,8 @@ const SignUp: FC<NativeStackScreenProps<AppStackNavParams, "SignUp">> = ({
         text1: "Success",
         text2: "User created successfully",
       });
+
+      navigation.navigate("Bottom Tabs");
     } else {
       Toast.show({
         type: "error",

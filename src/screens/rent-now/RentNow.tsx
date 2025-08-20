@@ -5,8 +5,11 @@ import {
   SafeAreaView,
   ScrollView,
   TouchableOpacity,
+  Platform,
 } from "react-native";
-import DateTimePicker from "@react-native-community/datetimepicker";
+import DateTimePicker, {
+  DateTimePickerAndroid,
+} from "@react-native-community/datetimepicker";
 import Toast from "react-native-toast-message";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
@@ -23,7 +26,7 @@ const RentNow: FC<NativeStackScreenProps<AppStackNavParams, "Rent Now">> = ({
   navigation,
   route,
 }) => {
-  const { listing } = route.params ?? {};
+  const { listing, fromBookingCard = false } = route.params ?? {};
 
   const { currentUser } = useUser();
   const { rentGarage } = useGarage();
@@ -31,8 +34,6 @@ const RentNow: FC<NativeStackScreenProps<AppStackNavParams, "Rent Now">> = ({
   const [startDate, setStartDate] = useState<Date>(new Date());
   const [endDate, setEndDate] = useState<Date>(new Date());
 
-  const [showStartDate, setShowStartDate] = useState<boolean>(false);
-  const [showEndDate, setShowEndDate] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
   const totalPrice = Math.round(
@@ -91,7 +92,7 @@ const RentNow: FC<NativeStackScreenProps<AppStackNavParams, "Rent Now">> = ({
     const res = await rentGarage({
       guest_id: currentUser.id,
       listing_id: listing.id,
-      host_id: listing.host_id.id,
+      host_id: fromBookingCard ? listing.host_id.id : listing.host_id,
       start_date: startDate,
       end_date: endDate,
       total_price: totalPrice,
@@ -117,6 +118,30 @@ const RentNow: FC<NativeStackScreenProps<AppStackNavParams, "Rent Now">> = ({
     setLoading(false);
   };
 
+  const showDatePickerStart = () => {
+    DateTimePickerAndroid.open({
+      value: startDate,
+      onChange: (event, date) => {
+        if (date) {
+          setStartDate(date);
+        }
+      },
+      mode: "date",
+    });
+  };
+
+  const showDatePickerEnd = () => {
+    DateTimePickerAndroid.open({
+      value: endDate,
+      onChange: (event, date) => {
+        if (date) {
+          setEndDate(date);
+        }
+      },
+      mode: "date",
+    });
+  };
+
   return (
     <SafeAreaView style={styles.mainContainer}>
       <ScrollView
@@ -136,50 +161,51 @@ const RentNow: FC<NativeStackScreenProps<AppStackNavParams, "Rent Now">> = ({
             <View style={layout.flex1}>
               <Text style={styles.text14}>Start Date</Text>
 
-              {/* {showStartDate ? ( */}
-              <DateTimePicker
-                value={startDate}
-                onChange={(event, date) => {
-                  if (date) {
-                    setStartDate(date);
-                    setShowStartDate(false);
-                  }
-                }}
-                mode="date"
-                minimumDate={new Date()}
-                style={{ marginLeft: -10 }}
-              />
-              {/* ) : (
-              <TouchableOpacity onPress={() => setShowStartDate(true)}>
-                <Text style={styles.text14}>
-                  {startDate.toLocaleDateString()}
-                </Text>
-              </TouchableOpacity>
-            )} */}
+              {Platform.OS === "ios" ? (
+                <DateTimePicker
+                  value={startDate}
+                  onChange={(_, date) => {
+                    if (date) {
+                      setStartDate(date);
+                    }
+                  }}
+                  mode="date"
+                  display="default"
+                  minimumDate={new Date()}
+                  style={{ marginLeft: -10 }}
+                />
+              ) : (
+                <TouchableOpacity onPress={() => showDatePickerStart()}>
+                  <Text style={styles.text14}>
+                    {startDate.toLocaleDateString()}
+                  </Text>
+                </TouchableOpacity>
+              )}
             </View>
 
             <View style={layout.flex1}>
               <Text style={styles.text14}>End Date</Text>
-              {/* {showEndDate ? ( */}
-              <DateTimePicker
-                value={endDate}
-                onChange={(event, date) => {
-                  if (date) {
-                    setEndDate(date);
-                    setShowEndDate(false);
-                  }
-                }}
-                mode="date"
-                minimumDate={startDate}
-                style={{ marginLeft: -10 }}
-              />
-              {/* ) : (
-              <TouchableOpacity onPress={() => setShowEndDate(true)}>
-                <Text style={styles.text14}>
-                  {endDate.toLocaleDateString()}
-                </Text>
-              </TouchableOpacity>
-            )} */}
+
+              {Platform.OS === "ios" ? (
+                <DateTimePicker
+                  value={endDate}
+                  onChange={(_, date) => {
+                    if (date) {
+                      setEndDate(date);
+                    }
+                  }}
+                  mode="date"
+                  display="default"
+                  minimumDate={startDate}
+                  style={{ marginLeft: -10 }}
+                />
+              ) : (
+                <TouchableOpacity onPress={() => showDatePickerEnd()}>
+                  <Text style={styles.text14}>
+                    {endDate.toLocaleDateString()}
+                  </Text>
+                </TouchableOpacity>
+              )}
             </View>
           </View>
         </View>

@@ -73,7 +73,8 @@ export const getListings = async (): Promise<any> => {
         )
       `
     )
-    .eq("is_active", true);
+    .eq("is_active", true)
+    .order("created_at", { ascending: false });
 
   if (error) {
     throw new Error(error.message);
@@ -159,7 +160,8 @@ export const getBookings = async (userId: string): Promise<any> => {
       `
     ) // Select bookings and associated listing title
     .eq("guest_id", userId) // Use the logged-in user's ID
-    .neq("status", "cancelled"); // Exclude cancelled bookings
+    .neq("status", "cancelled") // Exclude cancelled bookings
+    .order("start_date", { ascending: false });
 
   if (error) {
     throw new Error(error.message);

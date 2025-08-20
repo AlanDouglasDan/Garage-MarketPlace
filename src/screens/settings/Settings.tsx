@@ -10,7 +10,7 @@ import styles from "./Settings.styles";
 const Settings: FC<NativeStackScreenProps<BottomTabsNavParams, "Settings">> = ({
   navigation,
 }) => {
-  const { currentUser, logOut } = useUser();
+  const { currentUser, logOut, loading } = useUser();
 
   const logout = async () => {
     await logOut();
@@ -25,7 +25,12 @@ const Settings: FC<NativeStackScreenProps<BottomTabsNavParams, "Settings">> = ({
         <Text style={styles.bigText}>Settings</Text>
 
         {currentUser ? (
-          <Button title="Logout" onPress={logout} />
+          <Button
+            title="Logout"
+            onPress={logout}
+            loading={loading}
+            disabled={loading}
+          />
         ) : (
           // @ts-ignore
           <Button title="Login" onPress={() => navigation.navigate("Login")} />

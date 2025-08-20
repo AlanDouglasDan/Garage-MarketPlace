@@ -25,4 +25,9 @@ export default StyleSheet.create({
     borderWidth: 1,
     borderColor: palette.BLACK,
   },
+  destructive: {
+    borderColor: palette.RED,
+    borderWidth: 1,
+    backgroundColor: "transparent",
+  },
 });

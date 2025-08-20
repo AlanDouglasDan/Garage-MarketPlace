@@ -1,10 +1,11 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Platform } from "react-native";
 
 import { palette, typography } from "core/styles";
 
 export default StyleSheet.create({
   mainContainer: {
     flex: 1,
+    paddingTop: Platform.OS === "ios" ? 0 : 50,
     backgroundColor: palette.WHITE,
   },
   contentContainer: {
