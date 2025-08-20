@@ -11,6 +11,9 @@
       "@components/*": ["src/components/*"],
       "@hooks/*": ["src/hooks/*"],
       "@screens/*": ["src/screens/*"],
+      "@providers/*": ["src/providers/*"],
+      "@store/*": ["src/store/*"],
+      "@http/*": ["src/http/*"],
       "*": ["src/*"]
     }
   }

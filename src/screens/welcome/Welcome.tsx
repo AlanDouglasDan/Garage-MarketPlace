@@ -5,8 +5,7 @@ import { supabase } from "core/supabase";
 
 import { AppStackNavParams } from "navigation/AppStackNav";
 import { Button } from "components/Button";
-import { spacing } from "core/styles";
-import { palette } from "core/styles/palette";
+import { spacing, palette } from "core/styles";
 import styles from "./Welcome.styles";
 
 const Welcome: FC<NativeStackScreenProps<AppStackNavParams, "Welcome">> = ({
@@ -24,10 +23,9 @@ const Welcome: FC<NativeStackScreenProps<AppStackNavParams, "Welcome">> = ({
 
         if (error) throw error;
 
-        // If there's an active session, navigate to the home screen
+        // If there's an active session, navigate to the Bottom Tabs screen
         if (session?.user) {
-          // Navigation to Home screen
-          navigation.navigate("Home");
+          navigation.navigate("Bottom Tabs");
           return; // Exit early to prevent setting loading to false
         }
       } catch (error) {
@@ -56,9 +54,9 @@ const Welcome: FC<NativeStackScreenProps<AppStackNavParams, "Welcome">> = ({
         <Button title="Sign Up" onPress={() => navigation.navigate("SignUp")} />
 
         <Button
-          title="Log In"
+          title="Continue as Guest"
           containerStyle={spacing.marginTop20}
-          onPress={() => navigation.navigate("Login")}
+          onPress={() => navigation.navigate("Bottom Tabs")}
           variant="transparent"
         />
       </View>

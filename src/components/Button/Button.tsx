@@ -47,7 +47,7 @@ const Button: FC<ButtonProps> = ({
           variant === "transparent" && styles.transparent,
           style,
         ]}
-        onPress={onPress}
+        onPress={disabled ? () => {} : onPress}
       >
         {prefixIcon}
 
