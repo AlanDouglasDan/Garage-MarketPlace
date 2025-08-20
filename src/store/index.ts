@@ -11,7 +11,31 @@ const configureAppStore = (
   const devMiddlewares: Middleware[] = [];
 
   if (process.env.NODE_ENV === "development") {
-    const { logger } = require("redux-logger");
+    const { createLogger } = require("redux-logger");
+    
+    const logger = createLogger({
+      duration: false,
+      timestamp: false,
+      logErrors: true,
+      collapsed: (_, __, logEntry) => !logEntry.error,
+      colors: false,
+      logger: {
+        log: (message: string) => {
+          if (typeof message === 'string') {
+            console.log(message.replace(/%c/g, ''));
+          } else {
+            console.log(message);
+          }
+        },
+        error: (message: string) => {
+          if (typeof message === 'string') {
+            console.error(message.replace(/%c/g, ''));
+          } else {
+            console.error(message);
+          }
+        },
+      },
+    });
 
     devMiddlewares.push(logger);
   }
